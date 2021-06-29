@@ -1,0 +1,21 @@
+import nuke
+
+def main():
+	n = nuke.selectedNode()
+	inputs = n.inputs()
+	nodes = {}
+
+	for i in range(inputs):
+	    node = n.input(i)
+	    nodes[node] = i 
+
+	x = n.xpos()
+	y = n.ypos()
+
+	nuke.nodeCopy('%clipboard%')
+	nuke.nodePaste('%clipboard%')
+	n = nuke.selectedNode()
+
+	n.setXYpos(x+120,y)
+	for key, value in nodes.items():
+	    n.setInput(value, key)
